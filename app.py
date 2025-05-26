@@ -511,8 +511,7 @@ if not st.session_state.authenticated:
     st.markdown("""
         <div class="info-box animate-in" style="text-align: center; margin-top: 2rem;">
             <h4>📋 Comptes de démonstration</h4>
-            <p><strong>Admin:</strong> youness / admin123</p>
-            <p><strong>Utilisateurs:</strong> imad / imad123 | driss / driss123</p>
+
         </div>
     """, unsafe_allow_html=True)
     
