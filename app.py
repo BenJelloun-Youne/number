@@ -123,6 +123,18 @@ st.markdown("""
         margin: 1rem 0;
     }
 
+    .card h3 {
+        color: var(--text-primary);
+        font-weight: 600;
+        margin-bottom: 1rem;
+    }
+
+    .card p {
+        color: var(--text-secondary);
+        font-weight: 500;
+        line-height: 1.5;
+    }
+
     .card:hover {
         transform: translateY(-2px);
         box-shadow: var(--shadow-lg);
@@ -417,24 +429,24 @@ if not st.session_state.authenticated:
     with col1:
         st.markdown("""
             <div class="card animate-in">
-                <h3>🔍 Validation temps réel</h3>
-                <p>Vérifiez instantanément la validité de vos numéros français avec l'API Abstract</p>
+                <h3 style="color: #1e293b; font-weight: 600;">🔍 Validation temps réel</h3>
+                <p style="color: #334155; font-weight: 500;">Vérifiez instantanément la validité de vos numéros français avec l'API Abstract</p>
             </div>
         """, unsafe_allow_html=True)
     
     with col2:
         st.markdown("""
             <div class="card animate-in">
-                <h3>📊 Analyse complète</h3>
-                <p>Obtenez les détails sur l'opérateur, le type de ligne et la localisation</p>
+                <h3 style="color: #1e293b; font-weight: 600;">📊 Analyse complète</h3>
+                <p style="color: #334155; font-weight: 500;">Obtenez les détails sur l'opérateur, le type de ligne et la localisation</p>
             </div>
         """, unsafe_allow_html=True)
     
     with col3:
         st.markdown("""
             <div class="card animate-in">
-                <h3>📥 Export CSV</h3>
-                <p>Exportez vos résultats avec horodatage et traçabilité complète</p>
+                <h3 style="color: #1e293b; font-weight: 600;">📥 Export CSV</h3>
+                <p style="color: #334155; font-weight: 500;">Exportez vos résultats avec horodatage et traçabilité complète</p>
             </div>
         """, unsafe_allow_html=True)
     
