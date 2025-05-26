@@ -1,18 +1,22 @@
 {
     "youness": {
         "password": "admin123",
-        "role": "admin"
+        "role": "admin",
+        "quota": 1000
     },
     "imad": {
         "password": "imad123",
-        "role": "user"
+        "role": "user",
+        "quota": 100
     },
     "driss": {
         "password": "driss123",
-        "role": "user"
+        "role": "user",
+        "quota": 100
     },
     "Roch": {
         "password": "Roch",
-        "role": "admin"
+        "role": "admin",
+        "quota": 1000
     }
 }
