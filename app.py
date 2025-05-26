@@ -28,35 +28,35 @@ st.markdown("""
     /* Variables CSS modernes */
     :root {
         /* Palette de couleurs premium */
-        --primary: #2563eb;
-        --primary-light: #3b82f6;
-        --primary-dark: #1d4ed8;
-        --primary-gradient: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+        --primary: #1e40af;
+        --primary-light: #2563eb;
+        --primary-dark: #1e3a8a;
+        --primary-gradient: linear-gradient(135deg, #1e40af 0%, #1e3a8a 100%);
         
         /* Couleurs d'état */
-        --success: #059669;
-        --success-light: #10b981;
-        --success-bg: rgba(5, 150, 105, 0.1);
-        --error: #dc2626;
-        --error-light: #ef4444;
-        --error-bg: rgba(220, 38, 38, 0.1);
-        --warning: #d97706;
-        --warning-light: #f59e0b;
-        --warning-bg: rgba(217, 119, 6, 0.1);
+        --success: #047857;
+        --success-light: #059669;
+        --success-bg: rgba(4, 120, 87, 0.1);
+        --error: #b91c1c;
+        --error-light: #dc2626;
+        --error-bg: rgba(185, 28, 28, 0.1);
+        --warning: #b45309;
+        --warning-light: #d97706;
+        --warning-bg: rgba(180, 83, 9, 0.1);
         
         /* Couleurs neutres sophistiquées */
-        --background: #f1f5f9;
+        --background: #f8fafc;
         --surface: #ffffff;
         --surface-elevated: #ffffff;
-        --surface-hover: #f8fafc;
+        --surface-hover: #f1f5f9;
         --border: #e2e8f0;
         --border-light: #f1f5f9;
         
         /* Texte moderne */
         --text-primary: #0f172a;
-        --text-secondary: #334155;
-        --text-muted: #64748b;
-        --text-light: #94a3b8;
+        --text-secondary: #1e293b;
+        --text-muted: #334155;
+        --text-light: #475569;
         
         /* Ombres élégantes */
         --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
@@ -91,18 +91,15 @@ st.markdown("""
     h1, h2, h3, h4, h5, h6 {
         color: var(--text-primary);
         font-family: 'Inter', sans-serif;
-        font-weight: 600;
+        font-weight: 700;
         letter-spacing: -0.025em;
         line-height: 1.2;
     }
 
     h1 {
         font-size: 2.5rem;
-        font-weight: 700;
-        background: var(--primary-gradient);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
+        font-weight: 800;
+        color: var(--text-primary);
     }
 
     h2 {
@@ -112,13 +109,14 @@ st.markdown("""
 
     h3 {
         font-size: 1.5rem;
-        color: var(--text-secondary);
+        color: var(--text-primary);
     }
 
     p {
         color: var(--text-secondary);
         line-height: 1.6;
         font-size: 1rem;
+        font-weight: 500;
     }
 
     /* Boutons modernes */
@@ -178,13 +176,15 @@ st.markdown("""
 
     .card h3 {
         color: var(--text-primary);
-        font-weight: 600;
+        font-weight: 700;
         margin-bottom: 1rem;
+        font-size: 1.5rem;
     }
 
     .card p {
         color: var(--text-secondary);
         line-height: 1.6;
+        font-weight: 500;
     }
 
     /* Boîtes d'information stylisées */
@@ -201,27 +201,31 @@ st.markdown("""
 
     .info-box h3 {
         color: var(--text-primary);
-        font-weight: 600;
+        font-weight: 700;
         margin-bottom: 1rem;
+        font-size: 1.5rem;
     }
 
     .info-box p {
         color: var(--text-secondary);
         line-height: 1.6;
+        font-weight: 500;
     }
 
     .info-box ul {
         color: var(--text-secondary);
         margin-left: 1.5rem;
+        font-weight: 500;
     }
 
     .info-box li {
         margin-bottom: 0.5rem;
+        color: var(--text-secondary);
     }
 
     .info-box strong {
         color: var(--text-primary);
-        font-weight: 600;
+        font-weight: 700;
     }
 
     /* Tableau de données premium */
@@ -456,6 +460,37 @@ st.markdown("""
             flex-direction: column;
             gap: 1rem;
         }
+    }
+
+    /* Pied de page */
+    .footer {
+        text-align: center;
+        padding: 2rem;
+        color: var(--text-primary);
+        border-top: 1px solid var(--border);
+        margin-top: 3rem;
+        background: var(--surface);
+    }
+
+    .footer p {
+        color: var(--text-primary);
+        font-weight: 500;
+    }
+
+    .footer strong {
+        color: var(--text-primary);
+        font-weight: 700;
+    }
+
+    .footer .version {
+        color: var(--text-secondary);
+        font-weight: 500;
+    }
+
+    .footer .powered-by {
+        color: var(--text-secondary);
+        font-size: 0.8rem;
+        font-weight: 500;
     }
     </style>
 """, unsafe_allow_html=True)
@@ -923,9 +958,9 @@ if st.button("🔍 Lancer la validation", use_container_width=True):
 # --- Pied de page moderne ---
 st.markdown("<br><br>", unsafe_allow_html=True)
 st.markdown("""
-    <div style="text-align: center; padding: 2rem; color: var(--text-muted); border-top: 1px solid var(--border); margin-top: 3rem;">
+    <div class="footer">
         <p><strong>📞 Plateforme de Validation de Numéros Français</strong></p>
-        <p>Développé par DATAY ❤️ | Version 2.0 | © 2025</p>
-        <p style="font-size: 0.8rem;">Propulsé par Streamlit & Abstract API</p>
+        <p class="version">Développé par DATAY ❤️ | Version 2.0 | © 2025</p>
+        <p class="powered-by">Propulsé par Streamlit & Abstract API</p>
     </div>
 """, unsafe_allow_html=True)
