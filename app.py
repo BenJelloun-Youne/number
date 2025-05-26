@@ -387,22 +387,25 @@ def validate_phone_with_abstract(phone: str) -> dict:
         # Appel à l'API
         response = requests.get(API_BASE_URL, params=params, timeout=15)
         
-        # Vérification du statut HTTP
+        # Vérification du statut HTTP selon la documentation
         if response.status_code == 200:
             data = response.json()
-            # On utilise uniquement le retour de l'API
             return {
                 "success": True,
                 "data": data
             }
+        elif response.status_code == 400:
+            return {"success": False, "error": "Requête invalide"}
         elif response.status_code == 401:
             return {"success": False, "error": "Clé API invalide ou manquante"}
         elif response.status_code == 422:
             return {"success": False, "error": "Quota API atteint"}
         elif response.status_code == 429:
-            return {"success": False, "error": "Trop de requêtes par seconde"}
-        elif response.status_code == 400:
-            return {"success": False, "error": "Requête invalide"}
+            return {"success": False, "error": "Trop de requêtes par seconde (limite: 1 req/sec)"}
+        elif response.status_code == 500:
+            return {"success": False, "error": "Erreur interne du serveur"}
+        elif response.status_code == 503:
+            return {"success": False, "error": "Service indisponible"}
         else:
             return {"success": False, "error": f"Erreur HTTP {response.status_code}"}
             
