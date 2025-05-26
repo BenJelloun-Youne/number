@@ -647,48 +647,51 @@ usage_percentage = (quota_used / user_quota) * 100 if user_quota > 0 else 0
 
 st.markdown(f"""
     <div class="card animate-in">
-        <h3 style="color: #1e293b; font-weight: 600;">📊 Votre quota de validation</h3>
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 1rem;">
-            <div style="text-align: center; flex: 1;">
-                <h4 style="color: var(--primary); font-weight: 600;">Quota total</h4>
-                <p style="font-size: 1.5rem; font-weight: 700; color: var(--text-primary);">{user_quota}</p>
+        <h3 style="color: #1e293b; font-weight: 600; margin-bottom: 1.5rem;">📊 Votre quota de validation</h3>
+        
+        <!-- Statistiques -->
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-bottom: 2rem;">
+            <div style="background: var(--surface-hover); padding: 1.5rem; border-radius: var(--radius); text-align: center; border: 1px solid var(--border);">
+                <h4 style="color: var(--primary); font-weight: 600; margin-bottom: 0.5rem;">Quota total</h4>
+                <p style="font-size: 2rem; font-weight: 700; color: var(--text-primary);">{user_quota}</p>
             </div>
-            <div style="text-align: center; flex: 1;">
-                <h4 style="color: var(--success); font-weight: 600;">Restant</h4>
-                <p style="font-size: 1.5rem; font-weight: 700; color: var(--success);">{quota_remaining}</p>
+            <div style="background: var(--surface-hover); padding: 1.5rem; border-radius: var(--radius); text-align: center; border: 1px solid var(--border);">
+                <h4 style="color: var(--success); font-weight: 600; margin-bottom: 0.5rem;">Restant</h4>
+                <p style="font-size: 2rem; font-weight: 700; color: var(--success);">{quota_remaining}</p>
             </div>
-            <div style="text-align: center; flex: 1;">
-                <h4 style="color: var(--warning); font-weight: 600;">Utilisé</h4>
-                <p style="font-size: 1.5rem; font-weight: 700; color: var(--warning);">{quota_used}</p>
+            <div style="background: var(--surface-hover); padding: 1.5rem; border-radius: var(--radius); text-align: center; border: 1px solid var(--border);">
+                <h4 style="color: var(--warning); font-weight: 600; margin-bottom: 0.5rem;">Utilisé</h4>
+                <p style="font-size: 2rem; font-weight: 700; color: var(--warning);">{quota_used}</p>
             </div>
         </div>
         
         <!-- Barre de progression -->
-        <div style="margin-top: 2rem;">
-            <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
-                <span style="color: var(--text-secondary); font-weight: 500;">Progression</span>
-                <span style="color: var(--text-secondary); font-weight: 500;">{usage_percentage:.1f}%</span>
+        <div style="background: var(--surface-hover); padding: 1.5rem; border-radius: var(--radius); border: 1px solid var(--border);">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                <h4 style="color: var(--text-primary); font-weight: 600;">Progression</h4>
+                <span style="color: var(--text-primary); font-weight: 600; font-size: 1.1rem;">{usage_percentage:.1f}%</span>
             </div>
-            <div style="background: var(--border); height: 10px; border-radius: 5px; overflow: hidden;">
+            <div style="background: var(--border); height: 12px; border-radius: 6px; overflow: hidden; box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);">
                 <div style="
                     width: {usage_percentage}%;
                     height: 100%;
                     background: var(--primary-gradient);
-                    border-radius: 5px;
-                    transition: width 0.3s ease;
+                    border-radius: 6px;
+                    transition: width 0.5s ease;
+                    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
                 "></div>
             </div>
-        </div>
-        
-        <!-- Légende -->
-        <div style="margin-top: 1rem; display: flex; justify-content: center; gap: 2rem;">
-            <div style="display: flex; align-items: center; gap: 0.5rem;">
-                <div style="width: 12px; height: 12px; background: var(--primary); border-radius: 3px;"></div>
-                <span style="color: var(--text-secondary); font-size: 0.9rem;">Utilisé</span>
-            </div>
-            <div style="display: flex; align-items: center; gap: 0.5rem;">
-                <div style="width: 12px; height: 12px; background: var(--border); border-radius: 3px;"></div>
-                <span style="color: var(--text-secondary); font-size: 0.9rem;">Disponible</span>
+            
+            <!-- Légende -->
+            <div style="margin-top: 1rem; display: flex; justify-content: center; gap: 2rem;">
+                <div style="display: flex; align-items: center; gap: 0.5rem;">
+                    <div style="width: 12px; height: 12px; background: var(--primary); border-radius: 3px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);"></div>
+                    <span style="color: var(--text-secondary); font-weight: 500; font-size: 0.9rem;">Utilisé</span>
+                </div>
+                <div style="display: flex; align-items: center; gap: 0.5rem;">
+                    <div style="width: 12px; height: 12px; background: var(--border); border-radius: 3px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);"></div>
+                    <span style="color: var(--text-secondary); font-weight: 500; font-size: 0.9rem;">Disponible</span>
+                </div>
             </div>
         </div>
     </div>
