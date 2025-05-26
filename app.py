@@ -92,7 +92,10 @@ if not st.session_state.authenticated:
     
     # Pied de page
     st.markdown("---")
+    st.markdown("<div style='text-align: center;'>", unsafe_allow_html=True)
     st.markdown("🚀 Développé par DATAY | Solution professionnelle de validation de numéros")
+    st.markdown("Designé par A.Rochdi 🚛")
+    st.markdown("</div>", unsafe_allow_html=True)
     st.stop()
 
 # --- Interface principale ---
