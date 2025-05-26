@@ -768,7 +768,6 @@ if st.button("🔍 Lancer la validation", use_container_width=True):
 st.markdown("---")
 st.markdown("""
     <div class="card animate-in">
-        <h3>ℹ️ Informations API Abstract</h3>
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; margin-top: 1rem;">
             <div style="background: var(--surface-hover); padding: 1rem; border-radius: var(--radius); border: 1px solid var(--border);">
                 <h4>🔗 Endpoint</h4>
