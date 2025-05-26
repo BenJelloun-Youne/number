@@ -390,14 +390,10 @@ def validate_phone_with_abstract(phone: str) -> dict:
         # Vérification du statut HTTP
         if response.status_code == 200:
             data = response.json()
-            # Simplification de la validation
-            is_valid = (
-                data.get("valid", False) and 
-                data.get("country", {}).get("code", "") == "FR"
-            )
+            # On utilise uniquement le retour de l'API
             return {
                 "success": True,
-                "data": {**data, "valid": is_valid}
+                "data": data
             }
         elif response.status_code == 401:
             return {"success": False, "error": "Clé API invalide ou manquante"}
