@@ -49,9 +49,11 @@ st.markdown("""
         --surface: #ffffff;
         --surface-hover: #f1f5f9;
         --border: #e2e8f0;
-        --text-primary: #0f172a;
+        --text-primary: #1e293b;
         --text-secondary: #334155;
-        --text-muted: #64748b;
+        --text-muted: #475569;
+        --text-light: #64748b;
+        --text-lighter: #94a3b8;
         
         /* Ombres et effets */
         --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
@@ -193,6 +195,7 @@ st.markdown("""
         transition: var(--transition);
         background: var(--surface);
         color: var(--text-primary);
+        font-weight: 500;
     }
 
     .stTextInput > div > div > input:focus,
@@ -209,6 +212,7 @@ st.markdown("""
         padding: 1.5rem;
         border-radius: var(--radius);
         margin: 1rem 0;
+        color: var(--text-primary);
     }
 
     .success-box {
@@ -218,6 +222,7 @@ st.markdown("""
         padding: 1.5rem;
         border-radius: var(--radius);
         margin: 1rem 0;
+        color: var(--text-primary);
     }
 
     .error-box {
@@ -227,6 +232,7 @@ st.markdown("""
         padding: 1.5rem;
         border-radius: var(--radius);
         margin: 1rem 0;
+        color: var(--text-primary);
     }
 
     .progress-container {
