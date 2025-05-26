@@ -8,13 +8,13 @@
     "imad": {
         "password": "imad123",
         "role": "user",
-        "quota": 100,
+        "quota": 10,
         "quota_used": 0
     },
     "driss": {
         "password": "driss123",
         "role": "user",
-        "quota": 100,
+        "quota": 10,
         "quota_used": 0
     },
     "Roch": {
