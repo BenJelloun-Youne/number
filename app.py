@@ -911,7 +911,7 @@ st.markdown("""
             </div>
             <div style="background: var(--surface); padding: 1rem; border-radius: var(--radius); border: 1px solid var(--border);">
                 <h4 style="color: var(--primary);">⚡ Powered by</h4>
-                <p><strong>Abstract API</strong></p>
+                <p><strong>DATAY</strong></p>
             </div>
         </div>
         <p style="font-size: 0.9rem; color: var(--text-light);">
