@@ -523,7 +523,7 @@ st.markdown(f"""
     <div class="card animate-in" style="display: flex; justify-content: space-between; align-items: center;">
         <div>
             <h1 style="margin: 0; font-size: 1.8rem;">📞 Validation de Numéros Français</h1>
-            <p style="margin: 0; color: var(--text-muted);">Plateforme professionnelle powered by DatayI</p>
+            <p style="margin: 0; color: var(--text-muted);">Plateforme professionnelle powered by Datay</p>
         </div>
         <div style="text-align: right;">
             <span style="background: var(--primary-gradient); color: white; padding: 0.5rem 1rem; border-radius: 20px; font-weight: 600;">
