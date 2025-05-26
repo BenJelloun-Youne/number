@@ -452,10 +452,35 @@ if not st.session_state.authenticated:
     with col3:
         st.markdown("""
             <div class="card animate-in">
-                <h3 style="color: #1e293b; font-weight: 600;">📥 Export CSV</h3>
-                <p style="color: #334155; font-weight: 500;">Exportez vos résultats avec horodatage et traçabilité complète</p>
+                <h3 style="color: #1e293b; font-weight: 600;">🔄 Intégration CRM</h3>
+                <p style="color: #334155; font-weight: 500;">Intégration facile avec votre CRM pour une validation automatisée</p>
             </div>
         """, unsafe_allow_html=True)
+    
+    # Avantages d'intégration CRM
+    st.markdown("""
+        <div class="card animate-in" style="margin-top: 2rem;">
+            <h3 style="color: #1e293b; font-weight: 600; text-align: center; margin-bottom: 1.5rem;">💼 Avantages de l'intégration CRM</h3>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem;">
+                <div style="background: var(--surface-hover); padding: 1.5rem; border-radius: var(--radius); border: 1px solid var(--border);">
+                    <h4 style="color: var(--primary); font-weight: 600;">🔄 Synchronisation automatique</h4>
+                    <p style="color: #334155; font-weight: 500;">Validation en temps réel des numéros lors de leur saisie dans votre CRM</p>
+                </div>
+                <div style="background: var(--surface-hover); padding: 1.5rem; border-radius: var(--radius); border: 1px solid var(--border);">
+                    <h4 style="color: var(--primary); font-weight: 600;">📊 Qualité des données</h4>
+                    <p style="color: #334155; font-weight: 500;">Base de données propre et fiable pour vos campagnes marketing</p>
+                </div>
+                <div style="background: var(--surface-hover); padding: 1.5rem; border-radius: var(--radius); border: 1px solid var(--border);">
+                    <h4 style="color: var(--primary); font-weight: 600;">⚡ Performance</h4>
+                    <p style="color: #334155; font-weight: 500;">Optimisation des taux de contact et réduction des coûts d'appel</p>
+                </div>
+                <div style="background: var(--surface-hover); padding: 1.5rem; border-radius: var(--radius); border: 1px solid var(--border);">
+                    <h4 style="color: var(--primary); font-weight: 600;">🎯 ROI amélioré</h4>
+                    <p style="color: #334155; font-weight: 500;">Augmentation de l'efficacité de vos campagnes et meilleure rentabilité</p>
+                </div>
+            </div>
+        </div>
+    """, unsafe_allow_html=True)
     
     # Formulaire de connexion
     col1, col2, col3 = st.columns([1, 2, 1])
