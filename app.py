@@ -92,10 +92,12 @@ if not st.session_state.authenticated:
     
     # Pied de page
     st.markdown("---")
-    st.markdown("<div style='text-align: center;'>", unsafe_allow_html=True)
-    st.markdown("🚀 Développé par DATAY | Solution professionnelle de validation de numéros")
-    st.markdown("Designé par A.Rochdi 🚛")
-    st.markdown("</div>", unsafe_allow_html=True)
+    st.markdown("""
+    <div style='text-align: center; width: 100%; margin: 0 auto; padding: 20px 0;'>
+        <p style='margin: 0; padding: 5px 0;'>🚀 Développé par DATAY | Solution professionnelle de validation de numéros</p>
+        <p style='margin: 0; padding: 5px 0;'>Designé par A.Rochdi 🚛</p>
+    </div>
+    """, unsafe_allow_html=True)
     st.stop()
 
 # --- Interface principale ---
@@ -328,8 +330,10 @@ if st.button("🔍 Lancer la validation", use_container_width=True):
 
 # --- Pied de page ---
 st.markdown("---")
-st.markdown("<div style='text-align: center;'>", unsafe_allow_html=True)
-st.markdown("🚀 Développé par DATAY | Solution professionnelle de validation de numéros")
-st.markdown("Designé par A.Rochdi 🚛")
-st.markdown("</div>", unsafe_allow_html=True)
+st.markdown("""
+<div style='text-align: center; width: 100%; margin: 0 auto; padding: 20px 0;'>
+    <p style='margin: 0; padding: 5px 0;'>🚀 Développé par DATAY | Solution professionnelle de validation de numéros</p>
+    <p style='margin: 0; padding: 5px 0;'>Designé par A.Rochdi 🚛</p>
+</div>
+""", unsafe_allow_html=True)
 
