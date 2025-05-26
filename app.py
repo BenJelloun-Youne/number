@@ -688,8 +688,8 @@ if st.button("🔍 Lancer la validation", use_container_width=True):
         # Résultats finaux
         st.markdown("""
             <div class="success-box animate-in">
-                <h3>🎉 Validation terminée avec succès!</h3>
-                <p>Tous vos numéros ont été traités. Consultez les résultats ci-dessous.</p>
+                <h3 style="color: #1e293b; font-weight: 600; margin-bottom: 1rem;">🎉 Validation terminée avec succès!</h3>
+                <p style="color: #334155; font-weight: 500; font-size: 1.1rem;">Tous vos numéros ont été traités. Consultez les résultats ci-dessous.</p>
             </div>
         """, unsafe_allow_html=True)
         
@@ -699,7 +699,7 @@ if st.button("🔍 Lancer la validation", use_container_width=True):
             
             st.markdown("""
                 <div class="card animate-in">
-                    <h3>📋 Résultats détaillés</h3>
+                    <h3 style="color: #1e293b; font-weight: 600;">📋 Résultats détaillés</h3>
                 </div>
             """, unsafe_allow_html=True)
             
@@ -720,40 +720,40 @@ if st.button("🔍 Lancer la validation", use_container_width=True):
             with col1:
                 st.markdown(f"""
                     <div class="metric-card metric-valid">
-                        <h3>✅ Valides</h3>
-                        <h1 style="color: var(--success);">{valid_final}</h1>
+                        <h3 style="color: #1e293b; font-weight: 600;">✅ Valides</h3>
+                        <h1 style="color: var(--success); font-weight: 700;">{valid_final}</h1>
                     </div>
                 """, unsafe_allow_html=True)
             
             with col2:
                 st.markdown(f"""
                     <div class="metric-card metric-invalid">
-                        <h3>❌ Invalides</h3>
-                        <h1 style="color: var(--error);">{invalid_final}</h1>
+                        <h3 style="color: #1e293b; font-weight: 600;">❌ Invalides</h3>
+                        <h1 style="color: var(--error); font-weight: 700;">{invalid_final}</h1>
                     </div>
                 """, unsafe_allow_html=True)
             
             with col3:
                 st.markdown(f"""
                     <div class="metric-card metric-total">
-                        <h3>📊 Total</h3>
-                        <h1 style="color: var(--primary);">{len(results)}</h1>
+                        <h3 style="color: #1e293b; font-weight: 600;">📊 Total</h3>
+                        <h1 style="color: var(--primary); font-weight: 700;">{len(results)}</h1>
                     </div>
                 """, unsafe_allow_html=True)
             
             with col4:
                 st.markdown(f"""
                     <div class="metric-card metric-rate">
-                        <h3>📈 Taux succès</h3>
-                        <h1 style="color: var(--warning);">{success_rate:.1f}%</h1>
+                        <h3 style="color: #1e293b; font-weight: 600;">📈 Taux succès</h3>
+                        <h1 style="color: var(--warning); font-weight: 700;">{success_rate:.1f}%</h1>
                     </div>
                 """, unsafe_allow_html=True)
             
             # Export CSV
             st.markdown("""
                 <div class="card animate-in">
-                    <h3>📥 Export des résultats</h3>
-                    <p>Téléchargez vos résultats au format CSV avec traçabilité complète.</p>
+                    <h3 style="color: #1e293b; font-weight: 600;">📥 Export des résultats</h3>
+                    <p style="color: #334155; font-weight: 500;">Téléchargez vos résultats au format CSV avec traçabilité complète.</p>
                 </div>
             """, unsafe_allow_html=True)
             
