@@ -390,12 +390,10 @@ def validate_phone_with_abstract(phone: str) -> dict:
         # Vérification du statut HTTP
         if response.status_code == 200:
             data = response.json()
-            # Vérification plus stricte de la validité
+            # Simplification de la validation
             is_valid = (
                 data.get("valid", False) and 
-                data.get("format", {}).get("international", "") and
-                data.get("country", {}).get("code", "") == "FR" and
-                data.get("type", "") in ["MOBILE", "LANDLINE"]
+                data.get("country", {}).get("code", "") == "FR"
             )
             return {
                 "success": True,
