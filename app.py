@@ -603,10 +603,14 @@ if st.button("🔍 Lancer la validation", use_container_width=True):
     if not raws:
         st.error("❌ Veuillez saisir au moins un numéro à valider.")
     else:
+        # Animation d'attente
+        with st.spinner("⚡ Initialisation de la validation..."):
+            time.sleep(1)
+        
         st.markdown("""
             <div class="info-box animate-in">
-                <h3>⚡ Validation en cours</h3>
-                <p>Traitement de vos numéros via l'API Abstract...</p>
+                <h3 style="color: #1e293b; font-weight: 600;">⚡ Validation en cours</h3>
+                <p style="color: #334155; font-weight: 500;">Traitement de vos numéros via l'API Abstract...</p>
             </div>
         """, unsafe_allow_html=True)
         
@@ -615,71 +619,73 @@ if st.button("🔍 Lancer la validation", use_container_width=True):
         status_container = st.empty()
         stats_container = st.empty()
         total = len(raws)
-        
+
         for i, raw in enumerate(raws, start=1):
-            # Affichage du statut
-            status_container.markdown(f"""
-                <div class="progress-container">
-                    <h4>📊 Progression: {i}/{total}</h4>
-                    <p>Traitement du numéro: <code>{raw}</code></p>
-                </div>
-            """, unsafe_allow_html=True)
-            
-            # Normalisation du numéro
-            normalized = normalize_number(raw)
-            
-            # Appel à l'API Abstract
-            api_result = validate_phone_with_abstract(normalized)
-            
-            if api_result["success"]:
-                data = api_result["data"]
-                results.append({
-                    "🔢 Numéro original": raw,
-                    "📱 Numéro normalisé": data.get("phone", normalized),
-                    "✅ Statut": "✅ Valide" if data.get("valid", False) else "❌ Invalide",
-                    "🌍 Format international": data.get("format", {}).get("international", ""),
-                    "🏠 Format local": data.get("format", {}).get("local", ""),
-                    "🏳️ Pays": data.get("country", {}).get("name", ""),
-                    "📞 Type": data.get("type", ""),
-                    "📡 Opérateur": data.get("carrier", ""),
-                    "📍 Localisation": data.get("location", ""),
-                    "👤 Validé par": st.session_state.current_user,
-                    "⏰ Date validation": datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-                })
-            else:
-                results.append({
-                    "🔢 Numéro original": raw,
-                    "📱 Numéro normalisé": normalized,
-                    "✅ Statut": "❌ Erreur",
-                    "❌ Erreur": api_result["error"],
-                    "👤 Validé par": st.session_state.current_user,
-                    "⏰ Date validation": datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-                })
-            
-            # Statistiques temps réel
-            valid_count = sum(1 for r in results if "✅ Valide" in str(r.get("✅ Statut", "")))
-            invalid_count = len(results) - valid_count
-            
-            stats_container.markdown(f"""
-                <div style="display: flex; gap: 1rem; margin: 1rem 0;">
-                    <div class="metric-card metric-valid">
-                        <h4>✅ Valides</h4>
-                        <h2 style="color: var(--success);">{valid_count}</h2>
+            # Animation de chargement pour chaque numéro
+            with st.spinner(f"Validation du numéro {i}/{total}..."):
+                # Affichage du statut
+                status_container.markdown(f"""
+                    <div class="progress-container">
+                        <h4 style="color: #1e293b; font-weight: 600;">📊 Progression: {i}/{total}</h4>
+                        <p style="color: #334155; font-weight: 500;">Traitement du numéro: <code>{raw}</code></p>
                     </div>
-                    <div class="metric-card metric-invalid">
-                        <h4>❌ Invalides</h4>
-                        <h2 style="color: var(--error);">{invalid_count}</h2>
+                """, unsafe_allow_html=True)
+                
+                # Normalisation du numéro
+                normalized = normalize_number(raw)
+                
+                # Appel à l'API Abstract
+                api_result = validate_phone_with_abstract(normalized)
+                
+                if api_result["success"]:
+                    data = api_result["data"]
+                    results.append({
+                        "🔢 Numéro original": raw,
+                        "📱 Numéro normalisé": data.get("phone", normalized),
+                        "✅ Statut": "✅ Valide" if data.get("valid", False) else "❌ Invalide",
+                        "🌍 Format international": data.get("format", {}).get("international", ""),
+                        "🏠 Format local": data.get("format", {}).get("local", ""),
+                        "🏳️ Pays": data.get("country", {}).get("name", ""),
+                        "📞 Type": data.get("type", ""),
+                        "📡 Opérateur": data.get("carrier", ""),
+                        "📍 Localisation": data.get("location", ""),
+                        "👤 Validé par": st.session_state.current_user,
+                        "⏰ Date validation": datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+                    })
+                else:
+                    results.append({
+                        "🔢 Numéro original": raw,
+                        "📱 Numéro normalisé": normalized,
+                        "✅ Statut": "❌ Erreur",
+                        "❌ Erreur": api_result["error"],
+                        "👤 Validé par": st.session_state.current_user,
+                        "⏰ Date validation": datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+                    })
+                
+                # Statistiques temps réel
+                valid_count = sum(1 for r in results if "✅ Valide" in str(r.get("✅ Statut", "")))
+                invalid_count = len(results) - valid_count
+                
+                stats_container.markdown(f"""
+                    <div style="display: flex; gap: 1rem; margin: 1rem 0;">
+                        <div class="metric-card metric-valid">
+                            <h4 style="color: #1e293b; font-weight: 600;">✅ Valides</h4>
+                            <h2 style="color: var(--success); font-weight: 700;">{valid_count}</h2>
+                        </div>
+                        <div class="metric-card metric-invalid">
+                            <h4 style="color: #1e293b; font-weight: 600;">❌ Invalides</h4>
+                            <h2 style="color: var(--error); font-weight: 700;">{invalid_count}</h2>
+                        </div>
+                        <div class="metric-card metric-total">
+                            <h4 style="color: #1e293b; font-weight: 600;">📊 Total</h4>
+                            <h2 style="color: var(--primary); font-weight: 700;">{len(results)}</h2>
+                        </div>
                     </div>
-                    <div class="metric-card metric-total">
-                        <h4>📊 Total</h4>
-                        <h2 style="color: var(--primary);">{len(results)}</h2>
-                    </div>
-                </div>
-            """, unsafe_allow_html=True)
-            
-            # Délai pour respecter les limites de l'API (1 req/sec sur plan gratuit)
-            time.sleep(1.2)
-            progress_bar.progress(i / total)
+                """, unsafe_allow_html=True)
+                
+                # Délai pour respecter les limites de l'API (1 req/sec sur plan gratuit)
+                time.sleep(1.2)
+                progress_bar.progress(i / total)
         
         # Nettoyage interface
         status_container.empty()
