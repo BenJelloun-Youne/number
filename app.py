@@ -303,9 +303,9 @@ def load_users():
             return json.load(f)
     else:
         default_users = {
-            "youness": {"password": "admin123", "role": "admin"},
-            "imad": {"password": "imad123", "role": "user"},
-            "driss": {"password": "driss123", "role": "user"}
+            "youness": {"password": "admin123", "role": "admin", "quota": 1000},
+            "imad": {"password": "imad123", "role": "user", "quota": 100},
+            "driss": {"password": "driss123", "role": "user", "quota": 100}
         }
         save_users(default_users)
         return default_users
@@ -322,6 +322,8 @@ if 'current_user' not in st.session_state:
     st.session_state.current_user = None
 if 'users' not in st.session_state:
     st.session_state.users = load_users()
+if 'quota_used' not in st.session_state:
+    st.session_state.quota_used = 0
 
 # Fonctions d'authentification
 def login(username, password):
@@ -559,6 +561,7 @@ with st.sidebar:
                 new_username = st.text_input("Nom d'utilisateur")
                 new_password = st.text_input("Mot de passe", type="password")
                 new_role = st.selectbox("Rôle", ["user", "admin"])
+                new_quota = st.number_input("Quota de validation", min_value=10, max_value=10000, value=100, step=10)
                 submit = st.form_submit_button("✅ Ajouter", use_container_width=True)
                 
                 if submit:
@@ -566,7 +569,8 @@ with st.sidebar:
                         if new_username not in st.session_state.users:
                             st.session_state.users[new_username] = {
                                 "password": new_password,
-                                "role": new_role
+                                "role": new_role,
+                                "quota": new_quota
                             }
                             save_users(st.session_state.users)
                             st.success(f"✅ Utilisateur {new_username} ajouté!")
@@ -579,11 +583,13 @@ with st.sidebar:
             # Liste des utilisateurs
             st.markdown("**👥 Utilisateurs existants**")
             for user in st.session_state.users:
-                col1, col2 = st.columns([3, 1])
+                col1, col2, col3 = st.columns([2, 2, 1])
                 role = st.session_state.users[user]["role"]
+                quota = st.session_state.users[user]["quota"]
                 col1.markdown(f"**{user}** ({role})")
+                col2.markdown(f"Quota: {quota} numéros")
                 
-                if col2.button("🗑️", key=f"del_{user}", help=f"Supprimer {user}"):
+                if col3.button("🗑️", key=f"del_{user}", help=f"Supprimer {user}"):
                     if user != st.session_state.current_user:
                         del st.session_state.users[user]
                         save_users(st.session_state.users)
@@ -591,6 +597,23 @@ with st.sidebar:
                         st.rerun()
                     else:
                         st.error("❌ Vous ne pouvez pas vous supprimer")
+                
+                # Modification du quota
+                with st.expander(f"📊 Modifier le quota de {user}"):
+                    with st.form(f"quota_form_{user}"):
+                        new_quota = st.number_input(
+                            "Nouveau quota",
+                            min_value=10,
+                            max_value=10000,
+                            value=quota,
+                            step=10,
+                            key=f"quota_{user}"
+                        )
+                        if st.form_submit_button("✅ Mettre à jour"):
+                            st.session_state.users[user]["quota"] = new_quota
+                            save_users(st.session_state.users)
+                            st.success(f"✅ Quota de {user} mis à jour!")
+                            st.rerun()
 
 # Interface de validation
 st.markdown("""
@@ -607,6 +630,31 @@ st.markdown("""
     </div>
 """, unsafe_allow_html=True)
 
+# Affichage du quota
+current_user = st.session_state.current_user
+user_quota = st.session_state.users[current_user]["quota"]
+quota_remaining = user_quota - st.session_state.quota_used
+
+st.markdown(f"""
+    <div class="card animate-in">
+        <h3 style="color: #1e293b; font-weight: 600;">📊 Votre quota de validation</h3>
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 1rem;">
+            <div style="text-align: center; flex: 1;">
+                <h4 style="color: var(--primary); font-weight: 600;">Quota total</h4>
+                <p style="font-size: 1.5rem; font-weight: 700; color: var(--text-primary);">{user_quota}</p>
+            </div>
+            <div style="text-align: center; flex: 1;">
+                <h4 style="color: var(--success); font-weight: 600;">Restant</h4>
+                <p style="font-size: 1.5rem; font-weight: 700; color: var(--success);">{quota_remaining}</p>
+            </div>
+            <div style="text-align: center; flex: 1;">
+                <h4 style="color: var(--warning); font-weight: 600;">Utilisé</h4>
+                <p style="font-size: 1.5rem; font-weight: 700; color: var(--warning);">{st.session_state.quota_used}</p>
+            </div>
+        </div>
+    </div>
+""", unsafe_allow_html=True)
+
 # Zone de saisie
 st.markdown("""
     <div class="card animate-in">
@@ -618,7 +666,7 @@ numbers_text = st.text_area(
     "Collez vos numéros ici",
     placeholder="Exemple:\n+33612345678\n0612345678\n06 12 34 56 78\n0033612345678\n612345678",
     height=200,
-    help="Un numéro par ligne. Tous les formats français sont acceptés."
+    help=f"Un numéro par ligne. Quota restant : {quota_remaining} numéros"
 )
 
 # Validation
@@ -627,7 +675,12 @@ if st.button("🔍 Lancer la validation", use_container_width=True):
     
     if not raws:
         st.error("❌ Veuillez saisir au moins un numéro à valider.")
+    elif len(raws) > quota_remaining:
+        st.error(f"❌ Vous avez dépassé votre quota restant ({quota_remaining} numéros).")
     else:
+        # Mise à jour du quota utilisé
+        st.session_state.quota_used += len(raws)
+        
         # Animation d'attente
         with st.spinner("⚡ Initialisation de la validation..."):
             time.sleep(1)
