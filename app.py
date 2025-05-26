@@ -777,56 +777,39 @@ if st.button("🔍 Lancer la validation", use_container_width=True):
                     help=f"Fichier: {filename} - {len(results)} numéros traités"
                 )
 
-# Section d'informations sur l'API
+# Section des avantages
 st.markdown("---")
-st.markdown("""
-    <div class="card animate-in">
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; margin-top: 1rem;">
-            <div style="background: var(--surface-hover); padding: 1rem; border-radius: var(--radius); border: 1px solid var(--border);">
-                <h4>🔗 Endpoint</h4>
-                <code>https://phonevalidation.abstractapi.com/v1/</code>
-            </div>
-            <div style="background: var(--surface-hover); padding: 1rem; border-radius: var(--radius); border: 1px solid var(--border);">
-                <h4>⚡ Limite</h4>
-                <p>1 requête/seconde (plan gratuit)</p>
-            </div>
-            <div style="background: var(--surface-hover); padding: 1rem; border-radius: var(--radius); border: 1px solid var(--border);">
-                <h4>🌍 Couverture</h4>
-                <p>190+ pays supportés</p>
-            </div>
-            <div style="background: var(--surface-hover); padding: 1rem; border-radius: var(--radius); border: 1px solid var(--border);">
-                <h4>📊 Données</h4>
-                <p>Validité, opérateur, type, localisation</p>
-            </div>
-        </div>
-    </div>
-""", unsafe_allow_html=True)
+st.markdown("### 🎯 Avantages de notre solution")
+col1, col2 = st.columns(2)
 
-# Guide des codes d'erreur
-with st.expander("📚 Guide des codes d'erreur API"):
+with col1:
     st.markdown("""
-    | Code | Type | Description |
-    |------|------|-------------|
-    | 200 | ✅ OK | Tout fonctionne normalement |
-    | 400 | ❌ Bad Request | Requête mal formée |
-    | 401 | 🔐 Unauthorized | Clé API manquante ou incorrecte |
-    | 422 | 💳 Quota Reached | Quota API atteint (plans gratuits) |
-    | 429 | ⏱️ Too Many Requests | Trop de requêtes par seconde |
-    | 500 | 🔥 Internal Server Error | Erreur côté serveur |
-    | 503 | 🚫 Service Unavailable | Service temporairement indisponible |
+        #### 🛡️ Sécurité renforcée
+        - Élimination des faux numéros
+        - Suppression des NRP
+        - Base de données propre et sécurisée
+    """)
+    
+    st.markdown("""
+        #### 📞 Joignabilité optimale
+        - Amélioration des taux de contact
+        - Optimisation des campagnes
+        - Meilleure efficacité opérationnelle
     """)
 
-# Guide des types de numéros
-with st.expander("📱 Types de numéros supportés"):
+with col2:
     st.markdown("""
-    - **Landline** : Ligne fixe
-    - **Mobile** : Téléphone mobile
-    - **Satellite** : Téléphone satellite
-    - **Premium** : Numéro surtaxé
-    - **Paging** : Service de messagerie
-    - **Special** : Numéro spécialisé
-    - **Toll_Free** : Numéro gratuit
-    - **Unknown** : Type inconnu
+        #### ⚡ Performance
+        - Optimisation du système téléphonique
+        - Numéros validés et qualifiés
+        - Traitement rapide et fiable
+    """)
+    
+    st.markdown("""
+        #### 📊 ROI garanti
+        - Réduction des coûts opérationnels
+        - Augmentation de l'efficacité
+        - Meilleure rentabilité des campagnes
     """)
 
 # Footer avec informations
