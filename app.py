@@ -303,9 +303,9 @@ def load_users():
             return json.load(f)
     else:
         default_users = {
-            "youness": {"password": "admin123", "role": "admin", "quota": 1000},
-            "imad": {"password": "imad123", "role": "user", "quota": 100},
-            "driss": {"password": "driss123", "role": "user", "quota": 100}
+            "youness": {"password": "admin123", "role": "admin", "quota": 1000, "quota_used": 0},
+            "imad": {"password": "imad123", "role": "user", "quota": 100, "quota_used": 0},
+            "driss": {"password": "driss123", "role": "user", "quota": 100, "quota_used": 0}
         }
         save_users(default_users)
         return default_users
@@ -322,8 +322,6 @@ if 'current_user' not in st.session_state:
     st.session_state.current_user = None
 if 'users' not in st.session_state:
     st.session_state.users = load_users()
-if 'quota_used' not in st.session_state:
-    st.session_state.quota_used = 0
 
 # Fonctions d'authentification
 def login(username, password):
@@ -525,7 +523,7 @@ st.markdown(f"""
     <div class="card animate-in" style="display: flex; justify-content: space-between; align-items: center;">
         <div>
             <h1 style="margin: 0; font-size: 1.8rem;">📞 Validation de Numéros Français</h1>
-            <p style="margin: 0; color: var(--text-muted);">Plateforme professionnelle powered by Abstract API</p>
+            <p style="margin: 0; color: var(--text-muted);">Plateforme professionnelle powered by DatayI</p>
         </div>
         <div style="text-align: right;">
             <span style="background: var(--primary-gradient); color: white; padding: 0.5rem 1rem; border-radius: 20px; font-weight: 600;">
@@ -570,7 +568,8 @@ with st.sidebar:
                             st.session_state.users[new_username] = {
                                 "password": new_password,
                                 "role": new_role,
-                                "quota": new_quota
+                                "quota": new_quota,
+                                "quota_used": 0
                             }
                             save_users(st.session_state.users)
                             st.success(f"✅ Utilisateur {new_username} ajouté!")
@@ -583,13 +582,17 @@ with st.sidebar:
             # Liste des utilisateurs
             st.markdown("**👥 Utilisateurs existants**")
             for user in st.session_state.users:
-                col1, col2, col3 = st.columns([2, 2, 1])
+                col1, col2, col3, col4 = st.columns([2, 2, 2, 1])
                 role = st.session_state.users[user]["role"]
                 quota = st.session_state.users[user]["quota"]
-                col1.markdown(f"**{user}** ({role})")
-                col2.markdown(f"Quota: {quota} numéros")
+                quota_used = st.session_state.users[user].get("quota_used", 0)
+                quota_remaining = quota - quota_used
                 
-                if col3.button("🗑️", key=f"del_{user}", help=f"Supprimer {user}"):
+                col1.markdown(f"**{user}** ({role})")
+                col2.markdown(f"Quota total: {quota}")
+                col3.markdown(f"Utilisé: {quota_used} / Restant: {quota_remaining}")
+                
+                if col4.button("🗑️", key=f"del_{user}", help=f"Supprimer {user}"):
                     if user != st.session_state.current_user:
                         del st.session_state.users[user]
                         save_users(st.session_state.users)
@@ -609,8 +612,11 @@ with st.sidebar:
                             step=10,
                             key=f"quota_{user}"
                         )
+                        reset_quota = st.checkbox("Réinitialiser l'utilisation du quota", key=f"reset_{user}")
                         if st.form_submit_button("✅ Mettre à jour"):
                             st.session_state.users[user]["quota"] = new_quota
+                            if reset_quota:
+                                st.session_state.users[user]["quota_used"] = 0
                             save_users(st.session_state.users)
                             st.success(f"✅ Quota de {user} mis à jour!")
                             st.rerun()
@@ -633,7 +639,8 @@ st.markdown("""
 # Affichage du quota
 current_user = st.session_state.current_user
 user_quota = st.session_state.users[current_user]["quota"]
-quota_remaining = user_quota - st.session_state.quota_used
+quota_used = st.session_state.users[current_user].get("quota_used", 0)
+quota_remaining = user_quota - quota_used
 
 st.markdown(f"""
     <div class="card animate-in">
@@ -649,7 +656,7 @@ st.markdown(f"""
             </div>
             <div style="text-align: center; flex: 1;">
                 <h4 style="color: var(--warning); font-weight: 600;">Utilisé</h4>
-                <p style="font-size: 1.5rem; font-weight: 700; color: var(--warning);">{st.session_state.quota_used}</p>
+                <p style="font-size: 1.5rem; font-weight: 700; color: var(--warning);">{quota_used}</p>
             </div>
         </div>
     </div>
@@ -679,7 +686,8 @@ if st.button("🔍 Lancer la validation", use_container_width=True):
         st.error(f"❌ Vous avez dépassé votre quota restant ({quota_remaining} numéros).")
     else:
         # Mise à jour du quota utilisé
-        st.session_state.quota_used += len(raws)
+        st.session_state.users[current_user]["quota_used"] = quota_used + len(raws)
+        save_users(st.session_state.users)
         
         # Animation d'attente
         with st.spinner("⚡ Initialisation de la validation..."):
