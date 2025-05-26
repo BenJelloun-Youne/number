@@ -1,0 +1,18 @@
+{
+    "youness": {
+        "password": "admin123",
+        "role": "admin"
+    },
+    "imad": {
+        "password": "imad123",
+        "role": "user"
+    },
+    "driss": {
+        "password": "driss123",
+        "role": "user"
+    },
+    "Roch": {
+        "password": "Roch",
+        "role": "admin"
+    }
+}
