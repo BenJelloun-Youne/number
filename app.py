@@ -28,27 +28,27 @@ st.markdown("""
     /* Variables CSS modernes */
     :root {
         /* Palette de couleurs premium */
-        --primary: #6366f1;
-        --primary-light: #818cf8;
-        --primary-dark: #4f46e5;
-        --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        --primary: #2563eb;
+        --primary-light: #3b82f6;
+        --primary-dark: #1d4ed8;
+        --primary-gradient: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
         
         /* Couleurs d'état */
-        --success: #10b981;
-        --success-light: #34d399;
-        --success-bg: rgba(16, 185, 129, 0.1);
-        --error: #ef4444;
-        --error-light: #f87171;
-        --error-bg: rgba(239, 68, 68, 0.1);
-        --warning: #f59e0b;
-        --warning-light: #fbbf24;
-        --warning-bg: rgba(245, 158, 11, 0.1);
+        --success: #059669;
+        --success-light: #10b981;
+        --success-bg: rgba(5, 150, 105, 0.1);
+        --error: #dc2626;
+        --error-light: #ef4444;
+        --error-bg: rgba(220, 38, 38, 0.1);
+        --warning: #d97706;
+        --warning-light: #f59e0b;
+        --warning-bg: rgba(217, 119, 6, 0.1);
         
         /* Couleurs neutres sophistiquées */
-        --background: #f8fafc;
+        --background: #f1f5f9;
         --surface: #ffffff;
         --surface-elevated: #ffffff;
-        --surface-hover: #f1f5f9;
+        --surface-hover: #f8fafc;
         --border: #e2e8f0;
         --border-light: #f1f5f9;
         
@@ -176,21 +176,15 @@ st.markdown("""
         overflow: hidden;
     }
 
-    .card:hover {
-        transform: translateY(-4px);
-        box-shadow: var(--shadow-xl);
-        border-color: var(--primary-light);
+    .card h3 {
+        color: var(--text-primary);
+        font-weight: 600;
+        margin-bottom: 1rem;
     }
 
-    .card::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 4px;
-        background: var(--primary-gradient);
-        border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+    .card p {
+        color: var(--text-secondary);
+        line-height: 1.6;
     }
 
     /* Boîtes d'information stylisées */
@@ -205,60 +199,122 @@ st.markdown("""
         position: relative;
     }
 
-    .info-box::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 4px;
-        height: 100%;
-        background: var(--primary-gradient);
-        border-radius: 0 0 0 var(--radius);
+    .info-box h3 {
+        color: var(--text-primary);
+        font-weight: 600;
+        margin-bottom: 1rem;
     }
 
-    .success-box {
-        background: var(--success-bg);
-        border: 1px solid rgba(16, 185, 129, 0.2);
-        border-left: 4px solid var(--success);
-        padding: 1.5rem;
-        border-radius: var(--radius);
-        margin: 1rem 0;
+    .info-box p {
+        color: var(--text-secondary);
+        line-height: 1.6;
     }
 
-    .warning-box {
-        background: var(--warning-bg);
-        border: 1px solid rgba(245, 158, 11, 0.2);
-        border-left: 4px solid var(--warning);
-        padding: 1.5rem;
-        border-radius: var(--radius);
-        margin: 1rem 0;
+    .info-box ul {
+        color: var(--text-secondary);
+        margin-left: 1.5rem;
     }
 
-    .error-box {
-        background: var(--error-bg);
-        border: 1px solid rgba(239, 68, 68, 0.2);
-        border-left: 4px solid var(--error);
-        padding: 1.5rem;
-        border-radius: var(--radius);
-        margin: 1rem 0;
+    .info-box li {
+        margin-bottom: 0.5rem;
     }
 
-    /* Feature boxes pour la page de connexion */
-    .feature-box {
-        background: var(--surface);
+    .info-box strong {
+        color: var(--text-primary);
+        font-weight: 600;
+    }
+
+    /* Tableau de données premium */
+    .dataframe {
         border-radius: var(--radius-lg);
-        padding: 1.5rem;
+        overflow: hidden;
+        box-shadow: var(--shadow);
+        background: var(--surface);
         border: 1px solid var(--border);
-        box-shadow: var(--shadow-sm);
-        transition: var(--transition);
-        text-align: center;
-        height: 100%;
     }
 
-    .feature-box:hover {
-        transform: translateY(-2px);
-        box-shadow: var(--shadow);
-        border-color: var(--primary-light);
+    .dataframe th {
+        background: var(--surface-elevated) !important;
+        color: var(--text-primary) !important;
+        font-weight: 600 !important;
+        padding: 1.25rem !important;
+        border-bottom: 2px solid var(--border) !important;
+        font-family: 'Inter', sans-serif !important;
+        font-size: 0.875rem !important;
+        text-transform: uppercase !important;
+        letter-spacing: 0.05em !important;
+    }
+
+    .dataframe td {
+        padding: 1rem 1.25rem !important;
+        color: var(--text-secondary) !important;
+        border-bottom: 1px solid var(--border-light) !important;
+        font-family: 'Inter', sans-serif !important;
+        font-size: 0.9rem !important;
+    }
+
+    /* Statuts de validation modernes */
+    .valid-true {
+        background: var(--success-bg) !important;
+        color: var(--success) !important;
+        font-weight: 600 !important;
+        padding: 0.5rem 1rem !important;
+        border-radius: 9999px !important;
+        text-align: center !important;
+        font-size: 0.8rem !important;
+        text-transform: uppercase !important;
+        letter-spacing: 0.05em !important;
+        box-shadow: var(--shadow-sm) !important;
+    }
+
+    .valid-false {
+        background: var(--error-bg) !important;
+        color: var(--error) !important;
+        font-weight: 600 !important;
+        padding: 0.5rem 1rem !important;
+        border-radius: 9999px !important;
+        text-align: center !important;
+        font-size: 0.8rem !important;
+        text-transform: uppercase !important;
+        letter-spacing: 0.05em !important;
+        box-shadow: var(--shadow-sm) !important;
+    }
+
+    /* Messages d'état */
+    .stError {
+        background: var(--error-bg);
+        border: 1px solid rgba(220, 38, 38, 0.2);
+        border-left: 4px solid var(--error);
+        color: var(--error);
+        padding: 1rem;
+        border-radius: var(--radius);
+        margin: 1rem 0;
+        font-family: 'Inter', sans-serif;
+        font-weight: 500;
+    }
+
+    .stSuccess {
+        background: var(--success-bg);
+        border: 1px solid rgba(5, 150, 105, 0.2);
+        border-left: 4px solid var(--success);
+        color: var(--success);
+        padding: 1rem;
+        border-radius: var(--radius);
+        margin: 1rem 0;
+        font-family: 'Inter', sans-serif;
+        font-weight: 500;
+    }
+
+    .stWarning {
+        background: var(--warning-bg);
+        border: 1px solid rgba(217, 119, 6, 0.2);
+        border-left: 4px solid var(--warning);
+        color: var(--warning);
+        padding: 1rem;
+        border-radius: var(--radius);
+        margin: 1rem 0;
+        font-family: 'Inter', sans-serif;
+        font-weight: 500;
     }
 
     /* Inputs modernes */
@@ -277,8 +333,22 @@ st.markdown("""
     .stTextInput > div > div > input:focus,
     .stTextArea > div > div > textarea:focus {
         border-color: var(--primary);
-        box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+        box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
         outline: none;
+    }
+
+    /* Labels des inputs */
+    .stTextInput > label,
+    .stTextArea > label {
+        color: var(--text-primary);
+        font-weight: 500;
+        margin-bottom: 0.5rem;
+    }
+
+    /* Placeholders */
+    .stTextInput > div > div > input::placeholder,
+    .stTextArea > div > div > textarea::placeholder {
+        color: var(--text-muted);
     }
 
     /* Sidebar moderne */
@@ -313,111 +383,6 @@ st.markdown("""
         background: linear-gradient(135deg, var(--success) 0%, var(--success-light) 100%);
         color: white;
         box-shadow: var(--shadow-sm);
-    }
-
-    /* Tableau de données premium */
-    .dataframe {
-        border-radius: var(--radius-lg);
-        overflow: hidden;
-        box-shadow: var(--shadow);
-        background: var(--surface);
-        border: 1px solid var(--border);
-    }
-
-    .dataframe th {
-        background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%) !important;
-        color: var(--text-primary) !important;
-        font-weight: 600 !important;
-        padding: 1.25rem !important;
-        border-bottom: 2px solid var(--border) !important;
-        font-family: 'Inter', sans-serif !important;
-        font-size: 0.875rem !important;
-        text-transform: uppercase !important;
-        letter-spacing: 0.05em !important;
-    }
-
-    .dataframe td {
-        padding: 1rem 1.25rem !important;
-        color: var(--text-secondary) !important;
-        border-bottom: 1px solid var(--border-light) !important;
-        font-family: 'Inter', sans-serif !important;
-        font-size: 0.9rem !important;
-    }
-
-    .dataframe tr:hover td {
-        background: var(--surface-hover) !important;
-    }
-
-    /* Statuts de validation modernes */
-    .valid-true {
-        background: var(--success-gradient) !important;
-        color: white !important;
-        font-weight: 600 !important;
-        padding: 0.5rem 1rem !important;
-        border-radius: 9999px !important;
-        text-align: center !important;
-        font-size: 0.8rem !important;
-        text-transform: uppercase !important;
-        letter-spacing: 0.05em !important;
-        box-shadow: var(--shadow-sm) !important;
-    }
-
-    .valid-false {
-        background: linear-gradient(135deg, var(--error) 0%, var(--error-light) 100%) !important;
-        color: white !important;
-        font-weight: 600 !important;
-        padding: 0.5rem 1rem !important;
-        border-radius: 9999px !important;
-        text-align: center !important;
-        font-size: 0.8rem !important;
-        text-transform: uppercase !important;
-        letter-spacing: 0.05em !important;
-        box-shadow: var(--shadow-sm) !important;
-    }
-
-    /* Progress bar moderne */
-    .stProgress > div > div > div {
-        background: var(--primary-gradient);
-        border-radius: 9999px;
-    }
-
-    .stProgress > div > div {
-        background: var(--border-light);
-        border-radius: 9999px;
-    }
-
-    /* Messages d'état */
-    .stError {
-        background: var(--error-bg);
-        border: 1px solid rgba(239, 68, 68, 0.2);
-        border-left: 4px solid var(--error);
-        color: var(--error);
-        padding: 1rem;
-        border-radius: var(--radius);
-        margin: 1rem 0;
-        font-family: 'Inter', sans-serif;
-    }
-
-    .stSuccess {
-        background: var(--success-bg);
-        border: 1px solid rgba(16, 185, 129, 0.2);
-        border-left: 4px solid var(--success);
-        color: var(--success);
-        padding: 1rem;
-        border-radius: var(--radius);
-        margin: 1rem 0;
-        font-family: 'Inter', sans-serif;
-    }
-
-    .stWarning {
-        background: var(--warning-bg);
-        border: 1px solid rgba(245, 158, 11, 0.2);
-        border-left: 4px solid var(--warning);
-        color: var(--warning);
-        padding: 1rem;
-        border-radius: var(--radius);
-        margin: 1rem 0;
-        font-family: 'Inter', sans-serif;
     }
 
     /* Animations fluides */
@@ -960,7 +925,7 @@ st.markdown("<br><br>", unsafe_allow_html=True)
 st.markdown("""
     <div style="text-align: center; padding: 2rem; color: var(--text-muted); border-top: 1px solid var(--border); margin-top: 3rem;">
         <p><strong>📞 Plateforme de Validation de Numéros Français</strong></p>
-        <p>Développé par DATAY ❤️ | Version 2.0 | © 2024</p>
+        <p>Développé par DATAY ❤️ | Version 2.0 | © 2025</p>
         <p style="font-size: 0.8rem;">Propulsé par Streamlit & Abstract API</p>
     </div>
 """, unsafe_allow_html=True)
